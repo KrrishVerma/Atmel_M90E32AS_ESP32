@@ -155,19 +155,19 @@ void EnergyMeteringIC::initialize(int pin, unsigned short lineFreq, unsigned sho
 double EnergyMeteringIC::getVoltageA() {
   unsigned short voltage = readWriteRegister(READ, UrmsA, 0xFFFF);
   Serial.println("Raw UrmsA: 0x" + String(voltage, HEX));
-  return (double)voltage / 100;
+  return (double)voltage / 63; // Adjusted scaling factor
 }
 
 double EnergyMeteringIC::getVoltageB() {
   unsigned short voltage = readWriteRegister(READ, UrmsB, 0xFFFF);
   Serial.println("Raw UrmsB: 0x" + String(voltage, HEX));
-  return (double)voltage / 100;
+  return (double)voltage / 63;
 }
 
 double EnergyMeteringIC::getVoltageC() {
   unsigned short voltage = readWriteRegister(READ, UrmsC, 0xFFFF);
   Serial.println("Raw UrmsC: 0x" + String(voltage, HEX));
-  return (double)voltage / 100;
+  return (double)voltage / 63;
 }
 
 double EnergyMeteringIC::getCurrentA() {
