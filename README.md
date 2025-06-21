@@ -2,7 +2,7 @@
 ESP32 Compatible Library for Poly-Phase High-Performance Wide-Span Energy Metering IC
 
 # Overview
-The EnergyMonitorIC library enables precise monitoring of electrical parameters in a three-phase power system. It utilizes SPI communication to configure the ATM90E32 IC, set line frequency and gains, and retrieve data such as voltage, current, power, power factor, frequency, and temperature. The library includes functions like readWriteRegister() and read32BitRegister() for efficient register access, with error detection for SPI failures (e.g., disconnected wires) to enhance reliability. Initial versions include EnergyMonitorIC.h and EnergyMonitorIC.cpp, released as of June 20, 2025.
+The EnergyMeteringIC library enables precise monitoring of electrical parameters in a three-phase power system. It utilizes SPI communication to configure the ATM90E32 IC, set line frequency and gains, and retrieve data such as voltage, current, power, power factor, frequency, and temperature. The library includes functions like readWriteRegister() and read32BitRegister() for efficient register access, with error detection for SPI failures (e.g., disconnected wires) to enhance reliability. Initial versions include EnergyMonitorIC.h and EnergyMonitorIC.cpp, released as of June 20, 2025.
 
 # Features
 
