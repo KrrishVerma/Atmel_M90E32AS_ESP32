@@ -1,5 +1,5 @@
-#ifndef ENERGY_METERING_IC_H
-#define ENERGY_METERING_IC_H
+#ifndef ATMEL_M90E32AS_ESP32_H
+#define ATMEL_M90E32AS_ESP32_H
 #include <Arduino.h>
 #include <SPI.h>
 
@@ -35,7 +35,7 @@
 #define IgainB 0x2D       // Current Gain B
 #define IgainC 0x2E       // Current Gain C
 
-class EnergyMeteringIC {
+class Atmel_M90E32AS_ESP32 {
 private:
   unsigned short readWriteRegister(unsigned char rw, unsigned short address, unsigned short val);
   int _chipSelectPin;
@@ -51,8 +51,8 @@ private:
   int read32BitRegister(unsigned short highAddr, unsigned short lowAddr);
 
 public:
-  EnergyMeteringIC();
-  ~EnergyMeteringIC();
+  Atmel_M90E32AS_ESP32();
+  ~Atmel_M90E32AS_ESP32();
 
   void initialize(int pin, unsigned short lineFreq, unsigned short pgaGain,
                   unsigned short voltGainA, unsigned short voltGainB, unsigned short voltGainC,
