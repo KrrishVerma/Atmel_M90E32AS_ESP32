@@ -6,7 +6,7 @@ ESP32 Compatible Library for Poly-Phase High-Performance Wide-Span Energy Meteri
 
 
 # Overview
-The EnergyMeteringIC library enables precise monitoring of electrical parameters in a three-phase power system. It utilizes SPI communication to configure the ATM90E32 IC, set line frequency and gains, and retrieve data such as voltage, current, power, power factor, frequency, and temperature. The library includes functions like readWriteRegister() and read32BitRegister() for efficient register access, with error detection for SPI failures (e.g., disconnected wires) to enhance reliability. Initial versions include EnergyMeteringIC.h and EnergyMeteringIC.cpp, released as of June 21, 2025.
+The EnergyMeteringIC library enables precise monitoring of electrical parameters in a three-phase power system. It utilizes SPI communication to configure the M90E32AS IC, set line frequency and gains, and retrieve data such as voltage, current, power, power factor, frequency, and temperature. The library includes functions like readWriteRegister() and read32BitRegister() for efficient register access, with error detection for SPI failures (e.g., disconnected wires) to enhance reliability. Initial versions include Atmel_M90E32AS_ESP32.h and Atmel_M90E32AS_ESP32.cpp, released as of June 21, 2025.
 
 # Features
 
@@ -21,12 +21,12 @@ Via Arduino Library Manager
 
     Open the Arduino IDE.
     Go to Sketch > Include Library > Manage Libraries....
-    Search for EnergyMeteringIC.
+    Search for Atmel_M90E32AS_ESP32.
     Click Install Button.
 
 # Manual Installation
 
     Download the latest release from the Releases page.
     Extract the .zip file.
-    Move the EnergyMeteringIC folder to your Arduino libraries directory (e.g., ~/Documents/Arduino/libraries/).
+    Move the Atmel_M90E32AS_ESP32 folder to your Arduino libraries directory (e.g., ~/Documents/Arduino/libraries/).
     Restart the Arduino IDE.
