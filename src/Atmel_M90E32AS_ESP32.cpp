@@ -1,10 +1,10 @@
-#include "EnergyMeteringIC.h"
+#include "Atmel_M90E32AS_ESP32.h"
 
-EnergyMeteringIC::EnergyMeteringIC() {}
+Atmel_M90E32AS_ESP32::Atmel_M90E32AS_ESP32() {}
 
-EnergyMeteringIC::~EnergyMeteringIC() {}
+Atmel_M90E32AS_ESP32::~Atmel_M90E32AS_ESP32() {}
 
-unsigned short EnergyMeteringIC::readWriteRegister(unsigned char rw, unsigned short address, unsigned short val) {
+unsigned short Atmel_M90E32AS_ESP32::readWriteRegister(unsigned char rw, unsigned short address, unsigned short val) {
   unsigned char* data = (unsigned char*)&val;
   unsigned char* adata = (unsigned char*)&address;
   unsigned short output;
@@ -81,7 +81,7 @@ unsigned short EnergyMeteringIC::readWriteRegister(unsigned char rw, unsigned sh
   return output;
 }
 
-int EnergyMeteringIC::read32BitRegister(unsigned short highAddr, unsigned short lowAddr) {
+int Atmel_M90E32AS_ESP32::read32BitRegister(unsigned short highAddr, unsigned short lowAddr) {
   int val, val_h, val_l;
   val_h = readWriteRegister(READ, highAddr, 0xFFFF);
   val_l = readWriteRegister(READ, lowAddr, 0xFFFF);
@@ -93,7 +93,7 @@ int EnergyMeteringIC::read32BitRegister(unsigned short highAddr, unsigned short 
   return val;
 }
 
-void EnergyMeteringIC::initialize(int pin, unsigned short lineFreq, unsigned short pgaGain,
+void Atmel_M90E32AS_ESP32::initialize(int pin, unsigned short lineFreq, unsigned short pgaGain,
                                 unsigned short voltGainA, unsigned short voltGainB, unsigned short voltGainC,
                                 unsigned short currGainA, unsigned short currGainB, unsigned short currGainC) {
   _chipSelectPin = pin;
@@ -152,49 +152,49 @@ void EnergyMeteringIC::initialize(int pin, unsigned short lineFreq, unsigned sho
   delayMicroseconds(500);
 }
 
-double EnergyMeteringIC::getVoltageA() {
+double Atmel_M90E32AS_ESP32::getVoltageA() {
   unsigned short voltage = readWriteRegister(READ, UrmsA, 0xFFFF);
   Serial.println("Raw UrmsA: 0x" + String(voltage, HEX));
   return (double)voltage / 63; // Adjusted scaling factor
 }
 
-double EnergyMeteringIC::getVoltageB() {
+double Atmel_M90E32AS_ESP32::getVoltageB() {
   unsigned short voltage = readWriteRegister(READ, UrmsB, 0xFFFF);
   Serial.println("Raw UrmsB: 0x" + String(voltage, HEX));
   return (double)voltage / 63;
 }
 
-double EnergyMeteringIC::getVoltageC() {
+double Atmel_M90E32AS_ESP32::getVoltageC() {
   unsigned short voltage = readWriteRegister(READ, UrmsC, 0xFFFF);
   Serial.println("Raw UrmsC: 0x" + String(voltage, HEX));
   return (double)voltage / 63;
 }
 
-double EnergyMeteringIC::getCurrentA() {
+double Atmel_M90E32AS_ESP32::getCurrentA() {
   unsigned short current = readWriteRegister(READ, IrmsA, 0xFFFF);
   Serial.println("Raw IrmsA: 0x" + String(current, HEX));
   return (double)current / 1000;
 }
 
-double EnergyMeteringIC::getCurrentB() {
+double Atmel_M90E32AS_ESP32::getCurrentB() {
   unsigned short current = readWriteRegister(READ, IrmsB, 0xFFFF);
   Serial.println("Raw IrmsB: 0x" + String(current, HEX));
   return (double)current / 1000;
 }
 
-double EnergyMeteringIC::getCurrentC() {
+double Atmel_M90E32AS_ESP32::getCurrentC() {
   unsigned short current = readWriteRegister(READ, IrmsC, 0xFFFF);
   Serial.println("Raw IrmsC: 0x" + String(current, HEX));
   return (double)current / 1000;
 }
 
-double EnergyMeteringIC::getTotalActivePower() {
+double Atmel_M90E32AS_ESP32::getTotalActivePower() {
   int val = read32BitRegister(PmeanT, PmeanTLSB);
   Serial.println("Raw PmeanT: 0x" + String(val, HEX));
   return (double)val * 0.00032;
 }
 
-double EnergyMeteringIC::getTotalPowerFactor() {
+double Atmel_M90E32AS_ESP32::getTotalPowerFactor() {
   signed short pf = (signed short)readWriteRegister(READ, PFmeanT, 0xFFFF);
   Serial.println("Raw PFmeanT: 0x" + String(pf, HEX));
   if (pf & 0x8000) {
@@ -203,37 +203,37 @@ double EnergyMeteringIC::getTotalPowerFactor() {
   return (double)pf / 1000;
 }
 
-double EnergyMeteringIC::getFrequency() {
+double Atmel_M90E32AS_ESP32::getFrequency() {
   unsigned short freq = readWriteRegister(READ, Freq, 0xFFFF);
   Serial.println("Raw Freq: 0x" + String(freq, HEX));
   return (double)freq / 100;
 }
 
-double EnergyMeteringIC::getTemperature() {
+double Atmel_M90E32AS_ESP32::getTemperature() {
   signed short temp = (signed short)readWriteRegister(READ, Temp, 0xFFFF);
   Serial.println("Raw Temp: 0x" + String(temp, HEX));
   return (double)temp / 1.6; // Adjusted for ~25C
 }
 
-unsigned short EnergyMeteringIC::getSysStatus0() {
+unsigned short Atmel_M90E32AS_ESP32::getSysStatus0() {
   unsigned short status = readWriteRegister(READ, EMMState0, 0xFFFF);
   Serial.println("Raw EMMState0: 0x" + String(status, HEX));
   return status;
 }
 
-unsigned short EnergyMeteringIC::getSysStatus1() {
+unsigned short Atmel_M90E32AS_ESP32::getSysStatus1() {
   unsigned short status = readWriteRegister(READ, EMMState1, 0xFFFF);
   Serial.println("Raw EMMState1: 0x" + String(status, HEX));
   return status;
 }
 
-unsigned short EnergyMeteringIC::getConfigMode0() {
+unsigned short Atmel_M90E32AS_ESP32::getConfigMode0() {
   unsigned short config = readWriteRegister(READ, MMode0, 0xFFFF);
   Serial.println("Raw MMode0: 0x" + String(config, HEX));
   return config;
 }
 
-unsigned short EnergyMeteringIC::getConfigMode1() {
+unsigned short Atmel_M90E32AS_ESP32::getConfigMode1() {
   unsigned short config = readWriteRegister(READ, MMode1, 0xFFFF);
   Serial.println("Raw MMode1: 0x" + String(config, HEX));
   return config;
